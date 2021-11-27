@@ -2,13 +2,27 @@
 
 <template>
   <section>
-    <input type="text" placeholder="Your Name" />
-    <input type="text" placeholder="Your Age" />
+    <form @submit.prevent="submitData">
+      <input type="text" placeholder="Your Name" v-model="enteredName" />
+      <input type="text" placeholder="Your Age" v-model="enteredAge" />
+      <button>Set User Data</button>
+    </form>
   </section>
 </template>
 
 <script>
 export default {
-  data() {},
+  emits: ["set-data"],
+  data() {
+    return {
+      enteredName: "",
+      enteredAge: "",
+    };
+  },
+  methods: {
+    submitData() {
+      this.$emit("set-data", this.enteredAge);
+    },
+  },
 };
 </script>
